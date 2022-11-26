@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Wheels</title>
+    <link rel="shortcut icon" href="../static/favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<style>
+    body {
+        background-color: rgb(245, 247, 247);
+    }
+
+    * {
+        font-family: 'Raleway', sans-serif;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #header {
+        background: #fff;
+        transition: all 0.5s;
+        z-index: 997;
+        padding: 20px 0;
+        box-shadow: rgb(0 0 0 / 8%) 0px 1px 4px 0px;
+    }
+
+    @media (max-width: 992px) {
+        #header {
+            padding: 15px 0;
+        }
+    }
+
+    #header.header-scrolled {
+        top: 0;
+    }
+
+    #header .logo {
+        font-size: 28px;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    #header .logo a {
+        color: #555555;
+    }
+
+    #header .logo img {
+        max-height: 40px;
+    }
+
+    .navbar {
+        padding: 0;
+    }
+
+    .navbar ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        list-style: none;
+        align-items: center;
+    }
+
+    .navbar li {
+        position: relative;
+        padding: 0px 15px;
+        transition: all ease-in-out 1.2s;
+    }
+
+    .navbar a,
+    .navbar a:focus {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "Roboto", sans-serif;
+        font-size: 13px;
+        color: #626262;
+        white-space: nowrap;
+        transition: 0.3s;
+        text-transform: uppercase;
+        transition: all ease-in-out 0.3s;
+        font-weight: 500;
+    }
+
+    .navbar a i,
+    .navbar a:focus i {
+        font-size: 12px;
+        line-height: 0;
+        margin-left: 5px;
+    }
+
+    .navbar a:hover,
+    .navbar .active,
+    .navbar .active:focus,
+    .navbar li:hover>a {
+        color: black;
+        border-bottom: 2px solid goldenrod;
+    }
+
+    .navbar .dropdown ul {
+        display: block;
+        position: absolute;
+        left: 14px;
+        top: calc(100% + 30px);
+        margin: 0;
+        padding: 10px 0;
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        background: #fff;
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+        transition: 0.3s;
+        border-radius: 4px;
+    }
+
+    .navbar .dropdown ul li {
+        min-width: 200px;
+    }
+
+    .navbar .dropdown ul a {
+        padding: 10px 20px;
+        text-transform: none;
+    }
+
+    .navbar .dropdown ul a i {
+        font-size: 12px;
+    }
+
+    .navbar .dropdown ul a:hover,
+    .navbar .dropdown ul .active:hover,
+    .navbar .dropdown ul li:hover>a {
+        color: black;
+        font-weight: bold;
+    }
+
+    .navbar .dropdown:hover>ul {
+        opacity: 1;
+        top: 100%;
+        visibility: visible;
+    }
+
+    .navbar .dropdown .dropdown ul {
+        top: 0;
+        left: calc(100% - 30px);
+        visibility: hidden;
+    }
+
+    .navbar .dropdown .dropdown:hover>ul {
+        opacity: 1;
+        top: 0;
+        left: 100%;
+        visibility: visible;
+    }
+
+    @media (max-width: 1366px) {
+        .navbar .dropdown .dropdown ul {
+            left: -90%;
+        }
+
+        .navbar .dropdown .dropdown:hover>ul {
+            left: -100%;
+        }
+    }
+
+    .mobile-nav-toggle {
+        color: #555555;
+        font-size: 28px;
+        cursor: pointer;
+        display: none;
+        line-height: 0;
+        transition: 0.5s;
+    }
+
+    .mobile-nav-toggle.bi-x {
+        color: #fff;
+    }
+
+    @media (max-width: 991px) {
+        .mobile-nav-toggle {
+            display: block;
+        }
+
+        .navbar ul {
+            display: none;
+        }
+    }
+
+    .navbar-mobile {
+        position: fixed;
+        overflow: hidden;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(60, 60, 60, 0.9);
+        transition: 0.3s;
+        z-index: 999;
+    }
+
+    .navbar-mobile .mobile-nav-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .navbar-mobile ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        height: fit-content;
+        top: 55px;
+        right: 15px;
+        bottom: 15px;
+        left: 15px;
+        padding: 30px 0;
+        border-radius: 8px;
+        background-color: #fff;
+        overflow-y: auto;
+        transition: 0.3s;
+    }
+
+    .navbar-mobile a,
+    .navbar-mobile a:focus {
+        padding: 10px 20px;
+        font-size: 15px;
+        color: #555555;
+    }
+
+    .navbar-mobile a:hover,
+    .navbar-mobile .active,
+    .navbar-mobile li:hover>a {
+        color: black;
+    }
+
+    .navbar-mobile .dropdown ul {
+        position: static;
+        display: none;
+        margin: 10px 20px;
+        padding: 10px 0;
+        z-index: 99;
+        opacity: 1;
+        visibility: visible;
+        background: #fff;
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    }
+
+    .navbar-mobile .dropdown ul li {
+        text-align: center;
+        min-width: 200px;
+    }
+
+    .navbar-mobile .dropdown ul a {
+        padding: 10px 20px;
+    }
+
+    .navbar-mobile .dropdown ul a i {
+        font-size: 12px;
+    }
+
+    .navbar-mobile .dropdown ul a:hover,
+    .navbar-mobile .dropdown ul .active:hover,
+    .navbar-mobile .dropdown ul li:hover>a {
+        color: black;
+    }
+
+    .navbar-mobile .dropdown>.dropdown-active {
+        display: block;
+    }
+
+    label {
+        font-size: 1.3rem;
+        margin: 2px 20px;
+        font-weight: bold;
+    }
+
+    footer {
+        text-align: center;
+        color: white;
+        padding: 20px 30px;
+        margin-top: 10px;
+    }
+
+    footer a {
+        color: #daa520;
+        text-decoration: none;
+        transition: all ease-in-out 0.2s;
+    }
+
+    footer a:hover {
+        color: gold;
+    }
+
+    #hero {
+        width: 100%;
+        height: 100vh;
+        background-color: rgb(255, 255, 255);
+        overflow: hidden;
+        position: relative;
+    }
+
+    #hero .carousel,
+    #hero .carousel-inner,
+    #hero .carousel-item,
+    #hero .carousel-item::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    #hero .carousel-item {
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    #hero .carousel-img {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        opacity: 0.6;
+    }
+
+    #hero .container {
+        position: absolute;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-bottom: 50px;
+    }
+
+    @media (max-width: 1200px) {
+        #hero .container {
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+    }
+
+    #hero h2 {
+        color: #2f2f2f;
+        margin-bottom: 20px;
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    #hero p {
+        margin: 0 auto 30px auto;
+        color: #555555;
+    }
+
+    #hero .carousel-inner .carousel-item {
+        transition-property: opacity;
+        background-position: center top;
+    }
+
+    #hero .carousel-inner .carousel-item,
+    #hero .carousel-inner .active.carousel-item-start,
+    #hero .carousel-inner .active.carousel-item-end {
+        opacity: 0;
+    }
+
+    #hero .carousel-inner .active,
+    #hero .carousel-inner .carousel-item-next.carousel-item-start,
+    #hero .carousel-inner .carousel-item-prev.carousel-item-end {
+        opacity: 1;
+        transition: 0.5s;
+    }
+
+    #hero .carousel-inner .carousel-item-next,
+    #hero .carousel-inner .carousel-item-prev,
+    #hero .carousel-inner .active.carousel-item-start,
+    #hero .carousel-inner .active.carousel-item-end {
+        left: 0;
+        transform: translate3d(0, 0, 0);
+    }
+
+    #hero .carousel-control-next-icon,
+    #hero .carousel-control-prev-icon {
+        background: none;
+        font-size: 30px;
+        line-height: 0;
+        width: auto;
+        height: auto;
+        background: black;
+        border-radius: 50px;
+        transition: 0.3s;
+        color: rgba(255, 255, 255, 0.5);
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #hero .carousel-control-next-icon:hover,
+    #hero .carousel-control-prev-icon:hover {
+        background: rgba(0, 0, 0, 0.532);
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    #hero .carousel-indicators li {
+        cursor: pointer;
+        background: #fff;
+        overflow: hidden;
+        border: 1px solid black;
+        width: 12px;
+        height: 12px;
+        border-radius: 50px;
+        opacity: 0.6;
+        transition: 0.3s;
+    }
+
+    #hero .carousel-indicators li.active {
+        opacity: 1;
+        background: black;
+    }
+
+    @media (max-width: 992px) {
+        #hero {
+            height: 100vh;
+        }
+
+        #hero .container {
+            margin-top: 100px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #hero h2 {
+            font-size: 28px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+
+        #hero .carousel-control-prev,
+        #hero .carousel-control-next {
+            width: 5%;
+        }
+    }
+
+    @media (max-height: 500px) {
+        #hero {
+            height: 160vh;
+        }
+    }
+
+    section {
+        padding: 60px 0px;
+        overflow: hidden;
+    }
+
+    .section {
+        border-radius: 20px;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        z-index: 7;
+        margin-top: 3.5rem;
+        text-align: justify;
+    }
+
+    .heading {
+        font-family: 'Roboto', sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: inline;
+        padding-bottom: 1rem;
+        width: 500px;
+        height: 100px;
+        position: relative;
+    }
+
+    .heading::before {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 50%;
+        left: 25%;
+        border-bottom: 5px solid goldenrod;
+    }
+
+    @media(max-width: 991px) {
+        .heading {
+            text-align: center;
+        }
+
+        .navbar a:hover,
+        .navbar .active,
+        .navbar .active:focus,
+        .navbar li:hover>a {
+            color: black;
+            border-bottom: 0.5px solid goldenrod;
+            font-weight: bolder;
+        }
+
+        .navbar li {
+            padding-bottom: 20px;
+        }
+
+        .outer {
+            text-align: center;
+            padding-bottom: 10px;
+        }
+    }
+
+    .section-bg {
+        background-color: #f7fcfc;
+    }
+
+    .section-title {
+        text-align: center;
+        padding-bottom: 30px;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        position: relative;
+    }
+
+    .section-title h2::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: #3fbbc0;
+        bottom: 0;
+        left: calc(50% - 25px);
+    }
+
+    .section-title p {
+        margin-bottom: 0;
+    }
+
+    .img-holder {
+        opacity: 70%;
+    }
+</style>
+
+<body class="body" id="body">
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto">
+                <a href="/">
+                    <img src="../static/favicon.png" alt="" />
+                    Check Wheels
+                </a>
+            </h1>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li>
+                        <a class="nav-link scrollto py-1" href="#hero"> Home </a>
+                    </li>
+                    <li>
+                        <a class="nav-link scrollto py-1" href="#about"> About </a>
+                    </li>
+                    <li>
+                        <a class="nav-link scrollto py-1" href="#prediction"> Predict </a>
+                    </li>
+                    <li>
+                        <a class="nav-link scrollto py-1" href="#credits"> Credits </a>
+                    </li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" style="margin-top: 5rem;">
+        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <div class="carousel-img" style="background-image: url(../static/01.jpg)"></div>
+                    <div class="container">
+                        <h2>Welcome to <span>Check Wheels</span></h2>
+                        <p>
+                            Let's Check that a Car is Good Enough for you to Buy...
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img" style="background-image: url(../static/02.jpg)"></div>
+                    <div class="container">
+                        <h2>Give Data <span> <i class="bi bi-arrow-right-square mx-3"></i> Wait <i
+                                    class="bi bi-arrow-right-square mx-3"></i></span> and Boom...</h2>
+                        <p>
+                            Just give few info about your Dream Car to Us...
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-img" style="background-image: url(../static/03.jpg)"></div>
+                    <div class="container">
+                        <h2>Works with <span>AI Powered</span> Model</h2>
+                        <p>
+                            Instant Prediction with Basic Info...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+
+    <main id="main" class="main">
+        <div id="about" data-aos="fade-up" class="py-3 mx-3 my-5">
+            <div class="outer d-flex justify-content-center" style="flex-wrap: wrap;">
+                <div>
+                    <h1 class="heading mx-3">What we Do</h1>
+                </div>
+            </div>
+            <section class="section p-5">
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <img src="../static/04.jpg" class="img-fluid" alt="" />
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+                        <h3>This Web Application Comes with an integrated Naive Bias Model</h3>
+                        <p class="fst-italic">
+                            Which is a Machine Learning Model Mainly used for Predicting whether your Dream Car really
+                            matches your standards or not. Basically the Machine Learning Model is fired using a Django
+                            Backend which is completely based in Python.
+                        </p>
+                        <ul>
+                            <li>
+                                <i class="bi bi-check-circle"></i> To predict we need to select
+                                the symptoms among them and click on button predict.
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle"></i> As soon as the predict button
+                                is hit, Django backend activates and the Supervised model which is
+                                already trained using explicit dataset accepts the values.
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle"></i> Then converts it to model
+                                understandable Language (Data Preprocessing) and predicts the
+                                outcome using the predict operation.
+                            </li>
+                            <li>
+                                <i class="bi bi-check-circle"></i> This predicted result is then
+                                flushed to the frontend of the website for user notice.
+                            </li>
+                        </ul>
+                        <p class="fst-italic">
+                            Note:- The result is totally based on prediction. We don't register
+                            any claim on the truth of this information.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="prediction" class="py-3 mx-3 my-5">
+            <div class="outer d-flex justify-content-center" style="flex-wrap: wrap;">
+                <div>
+                    <h1 class="heading mx-3">Let's Dig In to the Prediction Part</h1>
+                </div>
+            </div>
+            <section class="p-5 section">
+                <div class="container mx-auto">
+                    <form id="form" class="container" action="/result" method="post">
+
+                        {% csrf_token %}
+
+                        <div class="my-4">
+                            <label for="b">Buy and Purchase<span style="color: red; font-size: 2rem;"> * </span></label>
+                            <select onchange="set()" name="b" id="b" class="form-select form-select-lg mb-3" required>
+                                <option value="NA" selected disabled>Select an Option </option>
+                                <option value="low">Low</option>
+                                <option value="med">Medium</option>
+                                <option value="high">High</option>
+                                <option value="vhigh">Very High</option>
+                            </select>
+                        </div>
+
+                        <div class="my-4">
+                            <label for="m">Maintenance Cost<span style="color: red; font-size: 2rem;"> * </span></label>
+                            <select onchange="set()" name="m" id="m" class="form-select form-select-lg mb-3">
+                                <option value="NA" selected disabled>Select an Option </option>
+                                <option value="low">Low</option>
+                                <option value="med">Medium</option>
+                                <option value="high">High</option>
+                                <option value="vhigh">Very High</option>
+                            </select>
+                        </div>
+
+                        <div class="my-4">
+                            <label for="d">No. of Doors<span style="color: red; font-size: 2rem;"> * </span></label>
+                            <select onchange="set()" name="d" id="d" class="form-select form-select-lg mb-3">
+                                <option value="NA" selected disabled>Select an Option </option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5more">5 and More</option>
+                            </select>
+                        </div>
+
+                        <div class="my-4">
+                            <label for="p">Seating Capacity<span style="color: red; font-size: 2rem;"> * </span></label>
+                            <select onchange="set()" name="p" id="p" class="form-select form-select-lg mb-3">
+                                <option value="NA" selected disabled>Select an Option </option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="more">More</option>
+                            </select>
+                        </div>
+
+                        <div class="my-4">
+                            <label for="l">Leg(Boot) Space<span style="color: red; font-size: 2rem;"> * </span></label>
+                            <select onchange="set()" name="l" id="l" class="form-select form-select-lg mb-3">
+                                <option value="NA" selected disabled>Select an Option </option>
+                                <option value="small">Small</option>
+                                <option value="med">Medium</option>
+                                <option value="big">Big</option>
+                            </select>
+                        </div>
+
+                        <div class="my-4">
+                            <label for="s">Safety Level<span style="color: red; font-size: 2rem;"> * </span></label>
+                            <select onchange="set()" name="s" id="s" class="form-select form-select-lg mb-3">
+                                <option value="NA" selected disabled>Select an Option </option>
+                                <option value="low">Low</option>
+                                <option value="med">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+
+                        <div class="mx-auto d-flex justify-content-center">
+                            <div>
+                                <button onclick="document.getElementById('submit').disabled = true"
+                                    class="btn btn-danger mx-2" type="reset">Reset</button>
+                                <button id="submit" class="btn btn-success mx-2" type="submit" disabled>Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div id="credits" class="py-3 mx-3 my-5">
+            <div class="outer d-flex justify-content-center" style="flex-wrap: wrap;">
+                <div>
+                    <h1 class="heading mx-3">Credits</h1>
+                </div>
+            </div>
+            <section class="section p-5">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique adipisci pariatur autem? Totam
+                tempora
+                dicta repellendus, quo fugiat consequuntur porro quod, reiciendis aliquam asperiores enim, voluptas eum
+                ullam natus sint! Minima quaerat ipsa tenetur adipisci aliquam nulla nobis numquam quasi, cum possimus,
+                aliquid iusto ex sapiente esse minus vero, assumenda rerum fugit asperiores iste! Dolorum a eveniet
+                voluptas, officia asperiores id officiis, eligendi in dolores, nostrum praesentium perspiciatis odio
+                incidunt libero! Doloremque suscipit eius aperiam fuga, sunt, assumenda deleniti accusamus ab, sapiente
+                labore quisquam cumque illo tempora odit perferendis voluptate aut at! Sed doloribus eveniet delectus,
+                quibusdam temporibus saepe deserunt voluptates neque hic porro libero rerum voluptatum, ipsa molestias
+                adipisci esse eligendi quidem architecto id a, mollitia labore blanditiis aliquam ipsum? Fugiat
+                temporibus
+                quia saepe voluptatibus fuga, animi, hic, dolores quidem fugit maxime labore quae. Iusto voluptas
+                dolore,
+                nulla molestiae voluptatibus sit id at eligendi nemo exercitationem harum illo excepturi modi temporibus
+                nihil iure saepe incidunt animi ex amet quasi. Dicta delectus fuga impedit possimus vel culpa ipsa
+                quasi.
+                Iure, molestiae. Necessitatibus, vero doloremque excepturi suscipit voluptate expedita nesciunt ducimus
+                maxime debitis dolorem tempora placeat minima sapiente voluptatem tempore veritatis beatae itaque quo
+                qui
+                voluptatibus nobis. Vero, perferendis? Rem quis et molestiae vero temporibus, illum, saepe sint iste
+                laboriosam sunt soluta accusantium laborum quia quas officia ratione harum repellat magni dolorem.
+                Dolore
+                harum doloremque error quo quibusdam voluptatibus totam omnis alias eligendi deserunt aliquam labore
+                expedita nesciunt culpa inventore perferendis nam fugit magnam, similique maiores iste sequi. Fugit
+                beatae
+                quaerat aspernatur non soluta repellendus amet architecto dolores consequuntur harum eaque eius omnis
+                dolor
+                blanditiis accusamus, laboriosam, ad veritatis vero impedit? Eum iusto, impedit et vitae molestiae
+                fugiat,
+                vero provident, fuga temporibus mollitia ipsum beatae ratione corporis. Veniam reiciendis quae eveniet?
+                Libero excepturi iure similique laudantium, eligendi facilis possimus odit est! Lorem ipsum dolor sit
+                amet
+                consectetur adipisicing elit. Expedita sunt quam accusantium quia temporibus ipsam quibusdam, eum vitae
+                voluptatum! Neque, obcaecati. Architecto velit at molestiae quo magnam, voluptas obcaecati placeat
+                aliquid
+                in! Distinctio quod natus beatae iure architecto cum unde eius libero veniam fugit eveniet consequatur
+                adipisci, cumque laborum reprehenderit dolore. Blanditiis ducimus dolores nulla beatae numquam,
+                accusantium
+                corrupti! Non libero exercitationem porro, minus odit consectetur asperiores illum ex iusto. Quo,
+                excepturi
+                quae placeat exercitationem veniam ipsum, ipsam, explicabo ipsa labore delectus architecto. Tempore, sit
+                deleniti. Tempora corrupti iusto ea, quidem quis aperiam, incidunt nulla sunt excepturi molestiae quos
+                alias! Illo natus tenetur odio nesciunt quasi recusandae dolor ex facere iure quia nobis quidem repellat
+                voluptate delectus incidunt nihil vel voluptas ut, omnis quaerat doloremque laboriosam libero ab
+                reiciendis.
+                Cupiditate nobis repellendus modi corporis? Ut temporibus voluptatum repudiandae, necessitatibus nulla
+                ex
+                blanditiis sint. In blanditiis a laborum numquam incidunt eum odit illum dolorum ipsum culpa dolores sed
+                nostrum vero autem, debitis labore delectus totam. Obcaecati voluptatem, distinctio pariatur quaerat
+                natus
+                harum animi mollitia quam reiciendis soluta quod corrupti placeat commodi exercitationem, numquam
+                eligendi.
+                Aut distinctio deserunt error ad ratione cum aliquid inventore quidem omnis labore, similique laborum
+                ullam
+                nulla tempora vitae non quae vero ea eligendi laboriosam provident repellendus beatae. Eius nisi in
+                incidunt
+                molestiae quam, aliquam quidem quibusdam tenetur aliquid autem enim fuga neque. Eveniet cum optio
+                perspiciatis atque minima quas delectus modi sed amet officiis fuga earum culpa animi exercitationem
+                cumque,
+                architecto recusandae nulla hic aperiam. Numquam tenetur sapiente, fugiat laudantium aut enim corporis
+                vitae
+                nulla sunt consectetur ab dolores quidem delectus, nemo deserunt illo? Voluptatibus laborum est
+                quibusdam
+                totam recusandae mollitia similique dolor, aliquid impedit a ipsa sapiente optio error perspiciatis fuga
+                saepe iusto labore, quae blanditiis doloribus asperiores amet temporibus vitae? Sed id vero eveniet
+                tempore.
+            </section>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer bg-dark">
+        Designed By <a target="_blank" href="https://utkarshkumar.vercel.app">Utkarsh Kumar</a>
+    </footer>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+</body>
+<script>
+    function set() {
+        if (document.getElementById('b').value != "NA" &&
+            document.getElementById('m').value != "NA" &&
+            document.getElementById('d').value != "NA" &&
+            document.getElementById('p').value != "NA" &&
+            document.getElementById('l').value != "NA" &&
+            document.getElementById('s').value != "NA"
+        )
+            document.getElementById('submit').disabled = false
+    }
+    window.addEventListener('load', () => {
+        AOS.init({
+            duration: 500,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: true
+        })
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+<script src="../static/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</html>
