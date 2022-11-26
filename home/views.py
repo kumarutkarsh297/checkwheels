@@ -69,5 +69,12 @@ def result(request):
     res = model.predict([[b,m,d,p,l,s]])[0]
     res1_k = list(acceptability.keys())
     res1_v = list(acceptability.values())
-    context = {"result":(res1_k[res1_v.index(res)])}
+    Result = (res1_k[res1_v.index(res)])
+    responses = {
+                 'acc':"A Car with these features is Predicted to be Acceptable",
+                 'unacc':"A Car with these features is Predicted to be Unacceptable", 
+                 'vgood':'A Car with these features is Predicted to be Somewhat Acceptable', 
+                 'good':'A Car with these features is Predicted to be Just Acceptable'
+                }
+    context = {"result":responses[Result]}
     return render(request, 'result.html', context)
