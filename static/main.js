@@ -1,3 +1,4 @@
+import Swiper from "swiper";
 (function() {
   "use strict";
 
